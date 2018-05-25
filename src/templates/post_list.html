@@ -16,6 +16,7 @@
 
   <div class="card-body">
     <h5 class="card-title">{{post.title}}</h5>
+      {% if post.user.get_full_name %} <p>Author: {{post.user.get_full_name}}</p> {% endif %}
     <h6 class="card-subtitle mb-2 text-muted">{{post.timestamp}} ago</h6>
     <p class="card-text">{{post.content|linebreaks|truncatechars:120}}</p>
     <a href="{{post.get_absolute_url}}" class="btn btn-primary">Read more</a>

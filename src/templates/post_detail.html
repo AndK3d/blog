@@ -8,27 +8,18 @@
         <img src='{{ post.image.url }}' class="img-fluid" alt="Responsive image">
     {% endif %}
     <h1> {{ post.title }} <small><small>{{ post.timestamp }}</small></small> </h1>
+    <p>Author: {{ post.user.get_full_name }}</p>
 
 
-
-    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
-Facebook
-</a>
-
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>
     <a href="https://twitter.com/home?status={{post.content|truncatechars:80|urlify}}%20{{ request.build_absolute_uri }}">
 Twitter
 </a>
-
-<a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>
-    Google+
-</a>
-
+<a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>Google+</a>
     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{post.title}}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">
 Linkedin
 </a>
-
     <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}">Reddit</a>
-
 
     {{ post.content|linebreaks }} <br>
     {{ post.updated }} <br>
