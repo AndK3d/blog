@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-sm-6 offset-sm-3">
+    <h1>{{ title }}</h1>
+    {% for post in post_list %}
+
+<div class="card">
+
+    {% if post.image %}
+
+    <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+
+    {% endif %}
+
+  <div class="card-body">
+    <h5 class="card-title">{{post.title}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{post.timestamp}} ago</h6>
+    <p class="card-text">{{post.content|linebreaks|truncatechars:120}}</p>
+    <a href="{{post.get_absolute_url}}" class="btn btn-primary">Read more</a>
+  </div>
+</div>
+    <br/>
+
+
+    {% endfor %}
+</div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if post_list.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ post_list.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ post_list.number }} of {{ post_list.paginator.num_pages }}.
+            </span>
+            {% if post_list.has_next %}
+            <a href="?page={{ post_list.next_page_number }}">next</a>
+            <a href="?page={{ post_list.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+            </span>
+    </div>
+
+{% endblock content%}

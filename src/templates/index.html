@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+
+    {% for post in post_list %}
+        <a href='{{post.get_absolute_url}}'>{{post.title}}</a><br>
+        {{post.content}}<br>
+        {{post.timestamp}}<br>
+        {{post.updated}}<br>
+        {{post.id}}<br>
+    {% endfor %}
+
+</body>
+</html>
