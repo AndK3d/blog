@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load urlify%}
 {% block head_title %} {{post.title}} | {{block.super}} {% endblock head_title %}
 
 {% block content %}
@@ -9,11 +9,13 @@
     {% endif %}
     <h1> {{ post.title }} <small><small>{{ post.timestamp }}</small></small> </h1>
 
+
+
     <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
 Facebook
 </a>
 
-    <a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}">
+    <a href="https://twitter.com/home?status={{post.content|truncatechars:80|urlify}}%20{{ request.build_absolute_uri }}">
 Twitter
 </a>
 
