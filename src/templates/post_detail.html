@@ -4,13 +4,22 @@
 
 {% block content %}
 <div class='col-sm-6 offset-sm-3'>
+
     {% if post.image %}
         <img src='{{ post.image.url }}' class="img-fluid" alt="Responsive image">
     {% endif %}
+     <div class="row">
     <h1> {{ post.title }} <small><small>{{ post.timestamp }}</small></small> </h1>
     <p>Author: {{ post.user.get_full_name }}</p>
+    </div>
+    <div class="row">
+    <p>
+    <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+    </p>
 
-
+    </div>
+<hr/>
+    <!--
     <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>
     <a href="https://twitter.com/home?status={{post.content|truncatechars:80|urlify}}%20{{ request.build_absolute_uri }}">
 Twitter
@@ -20,8 +29,13 @@ Twitter
 Linkedin
 </a>
     <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}">Reddit</a>
-
+    -->
+    <div class="row">
     {{ post.content|linebreaks }} <br>
-    {{ post.updated }} <br>
 
+    </div>
+<hr/>
+    <!-- facebook comments stuff -->
+    <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+    </div>
 {% endblock content %}
