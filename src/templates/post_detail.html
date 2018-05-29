@@ -9,7 +9,12 @@
         <img src='{{ post.image.url }}' class="img-fluid" alt="Responsive image">
     {% endif %}
      <div class="row">
-    <h1> {{ post.title }} <small><small>{{ post.timestamp }}</small></small> </h1>
+    <h1> {{ post.title }}
+        <small><small>
+            {% if post.draft %} <span style="color:red;">Draft</span> {% endif %}
+            {{ post.publish }}
+        </small></small>
+    </h1>
     <p>Author: {{ post.user.get_full_name }}</p>
     </div>
     <div class="row">
