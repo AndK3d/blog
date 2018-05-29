@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.contrib import messages
+from django.utils import timezone
 
 from .forms import PostForm
 from .models import Post
@@ -14,7 +15,7 @@ def post_create(request):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
 
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise Http404
 
     form = PostForm(request.POST or None, request.FILES or None)
@@ -45,7 +46,7 @@ def post_detail(request, slug=None):
 
 def post_list(request):
 
-    queryset_list = Post.objects.all()
+    queryset_list = Post.objects.filter(publish__lte=timezone.now())  #all()
     paginator = Paginator(queryset_list, 10)
 
     page = request.GET.get('page')
