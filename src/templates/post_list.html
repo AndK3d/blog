@@ -15,6 +15,8 @@
     {% endif %}
 
   <div class="card-body">
+    {% if post.draft %}<h5 class="card-title"><span style="color:red;">Staff only: Draft</span> </h5>{% endif %}
+    {% if post.publish > today %} <h5 class="card-title"><span style="color:red;">Staff only: Future post</span> </h5>  {% endif %}
     <h5 class="card-title">{{post.title}}</h5>
       {% if post.user.get_full_name %} <p>Author: {{post.user.get_full_name}}</p> {% endif %}
     <h6 class="card-subtitle mb-2 text-muted">{{post.publish}}</h6>

@@ -34,19 +34,26 @@ def post_create(request):
 def post_detail(request, slug=None):
 
     instance = get_object_or_404(Post, slug=slug)
+    if instance.draft or instance.publish > timezone.now().date():
+        if not request.user.is_staff or not request.user.is_superuser:
+            raise Http404
+
     share_string = quote_plus(instance.content)
     context = {
         "title": "Detail",
         "post": instance,
-        "share_string": share_string
+        "share_string": share_string,
     }
 
     return render(request, 'post_detail.html', context)
 
 
 def post_list(request):
+    today = timezone.now().date()
+    queryset_list = Post.objects.active()  #all()
+    if request.user.is_staff or request.user.is_superuser:
+        queryset_list = Post.objects.all()
 
-    queryset_list = Post.objects.filter(publish__lte=timezone.now())  #all()
     paginator = Paginator(queryset_list, 10)
 
     page = request.GET.get('page')
@@ -60,7 +67,8 @@ def post_list(request):
 
     context = {
         "title": "Posts List",
-        "post_list": queryset
+        "post_list": queryset,
+        "today": today,
     }
     return render(request, 'post_list.html', context)
 
