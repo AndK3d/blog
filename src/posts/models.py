@@ -8,7 +8,7 @@ from django.conf import settings
 
 def upload_location(instance, filename):
 
-    return "%s/%s" %(instance.id, filename)
+    return "%s/%s" %(instance.slug, filename)
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, on_delete=models.DO_NOTHING)
