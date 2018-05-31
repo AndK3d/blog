@@ -4,6 +4,12 @@
 
 <div class="col-sm-6 offset-sm-3">
     <h1>{{ title }}</h1>
+
+    <form method="GET" action="">
+        <input type="text" name="q" placeholder="Search posts" value="{{ request.GET.q }}"/>
+        <input type="submit" value="Search"/>
+    </form>
+    <br>
     {% for post in post_list %}
 
 <div class="card">
@@ -16,7 +22,11 @@
 
   <div class="card-body">
     {% if post.draft %}<h5 class="card-title"><span style="color:red;">Staff only: Draft</span> </h5>{% endif %}
-    {% if post.publish > today %} <h5 class="card-title"><span style="color:red;">Staff only: Future post</span> </h5>  {% endif %}
+
+    {% if post.publish > today %}
+      <h5 class="card-title"><span style="color:red;">Staff only: Future post</span> </h5>
+    {% endif %}
+
     <h5 class="card-title">{{post.title}}</h5>
       {% if post.user.get_full_name %} <p>Author: {{post.user.get_full_name}}</p> {% endif %}
     <h6 class="card-subtitle mb-2 text-muted">{{post.publish}}</h6>
@@ -34,13 +44,13 @@
         <span class="step-links">
             {% if post_list.has_previous %}
             <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ post_list.previous_page_number }}">previous</a>
+            <a href="?page={{ post_list.previous_page_number }}&q={{ request.GET.q }}">previous</a>
             {% endif %}
             <span class="current">
                 Page {{ post_list.number }} of {{ post_list.paginator.num_pages }}.
             </span>
             {% if post_list.has_next %}
-            <a href="?page={{ post_list.next_page_number }}">next</a>
+            <a href="?page={{ post_list.next_page_number }}&q={{ request.GET.q }}">next</a>
             <a href="?page={{ post_list.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
             </span>
