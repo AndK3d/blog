@@ -12,6 +12,7 @@
     <br>
     {% for post in post_list %}
 
+
 <div class="card">
 
     {% if post.image %}
@@ -30,10 +31,15 @@
     <h5 class="card-title">{{post.title}}</h5>
       {% if post.user.get_full_name %} <p>Author: {{post.user.get_full_name}}</p> {% endif %}
     <h6 class="card-subtitle mb-2 text-muted">{{post.publish}}</h6>
-    <p class="card-text">{{post.content|linebreaks|truncatechars:120}}</p>
+    <p class="card-text">
+        <div class="content-markdown" >
+    {{ post.content|truncatechars:120 }} <br>
+        </div>
+    </p>
     <a href="{{post.get_absolute_url}}" class="btn btn-primary">Read more</a>
   </div>
 </div>
+
     <br/>
 
 
