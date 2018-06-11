@@ -23,22 +23,11 @@
     </p>
 
     </div>
-<hr/>
-    <!--
-    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>
-    <a href="https://twitter.com/home?status={{post.content|truncatechars:80|urlify}}%20{{ request.build_absolute_uri }}">
-Twitter
-</a>
-<a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>Google+</a>
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{post.title}}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">
-Linkedin
-</a>
-    <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}">Reddit</a>
-    -->
-    <div class="row content-markdown">
-    {{ post.content }} <br>
-
+    <hr/>
+    <div class="row post-detail-item">
+        {{ post.get_markdown }} <br>   
     </div>
+   
 <hr/>
     <!-- facebook comments stuff -->
     <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>

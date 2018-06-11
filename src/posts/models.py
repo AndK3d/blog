@@ -5,6 +5,8 @@ from django.utils.text import slugify
 from django.urls import reverse
 from django.conf import settings
 from django.utils import timezone
+from django.utils.safestring import mark_safe
+from markdown_deux import markdown
 # Create your models here.
 
 def upload_location(instance, filename):
@@ -38,6 +40,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_markdown(self):
+        content = self.content
+        markdown_text = markdown(content)
+        return mark_safe(markdown_text)
 
     def get_absolute_url(self):
         return reverse('posts:detail', kwargs={'slug': self.slug})
