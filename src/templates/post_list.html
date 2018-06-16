@@ -3,16 +3,27 @@
 {% block content %}
 
 <div class="col-sm-6 offset-sm-3">
-    <h1>{{ title }}</h1>
-
+    <div class="row">
+        <h1>{{ title }}</h1>
+    </div>
+    
+<!-- Search form -->    
     <form method="GET" action="">
-        <input type="text" name="q" placeholder="Search posts" value="{{ request.GET.q }}"/>
-        <input type="submit" value="Search"/>
+        <div class="row">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" placeholder="Search posts" value="{{ request.GET.q }}"/>
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-default" value="Search"/>
+                    </span>
+                </div>
+        </div>
     </form>
-    <br>
-    {% for post in post_list %}
+<!-- End of search form --> 
+<br/>
 
+{% for post in post_list %}
 
+<div class="row">
 <div class="card">
 
     {% if post.image %}
@@ -43,7 +54,7 @@
     <a href="{{post.get_absolute_url}}" class="btn btn-primary">Read more</a>
   </div>
 </div>
-
+</div>
     <br/>
 
 
