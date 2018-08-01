@@ -28,8 +28,21 @@
         {{ post.get_markdown }} <br>   
     </div>
    
-<hr/>
+    <hr/>
+
+    <div>
+        {{comments}}
+        <p class="lead">Comments</p>
+        {% for comment in comments %}
+            <div class=''>
+                {{ comment.content }}
+            </div>
+        {% endfor %}
+    </div>
+
     <!-- facebook comments stuff -->
-    <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+
+    <!-- <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div> -->
+
     </div>
 {% endblock content %}

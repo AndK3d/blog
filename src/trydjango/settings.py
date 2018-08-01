@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'pagedown',
 
     # local
+    'comments',
     'posts',
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
