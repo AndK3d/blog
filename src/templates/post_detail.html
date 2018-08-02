@@ -31,11 +31,14 @@
     <hr/>
 
     <div>
-        {{comments}}
+       
         <p class="lead">Comments</p>
         {% for comment in comments %}
             <div class=''>
                 {{ comment.content }}
+                <br/>
+                <small>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago</small>
+                <hr/>
             </div>
         {% endfor %}
     </div>
